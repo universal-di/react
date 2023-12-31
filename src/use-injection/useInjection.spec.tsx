@@ -4,7 +4,7 @@ import React from 'react';
 import {DIContextProvider} from '../di-context/di-context-provider';
 import {useInjection} from './useInjection';
 import {afterEach, beforeEach, describe, expect, it, MockInstance, vi} from 'vitest';
-import {InjectionToken} from '@universal-di/core/dist/src/models';
+import {InjectionToken} from "@universal-di/core";
 import {Injector} from "@universal-di/core/dist/src/injector";
 
 class TestInjector {
