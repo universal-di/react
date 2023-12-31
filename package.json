@@ -1,6 +1,6 @@
 {
     "name": "@universal-di/react",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Universal Dependency Injection port for React",
     "scripts": {
         "build": "rimraf ./dist && tsc -p tsconfig.lib.json",
@@ -33,9 +33,9 @@
     "bugs": {
         "url": "https://github.com/universal-di/react/issues"
     },
-    "main": "./dist/index.js",
-    "module": "./dist/index.js",
-    "types": "./dist/index.d.ts",
+    "main": "./dist/src/index.js",
+    "module": "./dist/src/index.js",
+    "types": "./dist/src/index.d.ts",
     "keywords": [
         "universal",
         "dependency",
