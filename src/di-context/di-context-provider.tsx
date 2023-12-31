@@ -1,5 +1,5 @@
 import React, {ReactNode, useMemo} from 'react';
-import {Injector} from '@universal-di/core/dist/src/injector';
+import {Injector} from '@universal-di/core';
 import {DIContext} from './di-context';
 
 type Props = {

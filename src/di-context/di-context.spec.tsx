@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react';
 import React from 'react';
-import {Injector} from '@universal-di/core/dist/src/injector';
+import {Injector} from '@universal-di/core';
 import {DIContext} from './di-context';
 import {describe, expect, it} from 'vitest';
 
