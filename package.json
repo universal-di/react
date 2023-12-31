@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "Universal Dependency Injection port for React",
     "scripts": {
-        "build": "tsc -p tsconfig.lib.json",
+        "build": "rimraf ./dist && tsc -p tsconfig.lib.json",
         "test": "vitest",
         "test:ci": "vitest run"
     },
@@ -21,11 +21,12 @@
         "@types/node": "^8.0.31",
         "jsdom": "^23.0.1",
         "react-dom": "^18.2.0",
+        "rimraf": "^5.0.5",
         "rollup-plugin-swc": "^0.2.1",
         "typescript": "5.3.3",
         "vitest": "^1.1.0"
     },
-    "peerDependencies": {
+    "dependencies": {
         "@universal-di/core": "^0.0.3",
         "react": "^18.2.0"
     },

@@ -1,13 +1,13 @@
 import {render} from '@testing-library/react';
 import React from 'react';
-import {Injector} from '../injector';
+import {Injector} from '@universal-di/core/dist/src/injector';
 import {DIContext} from './di-context';
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
 
 describe('DIContext', () => {
     it('can access null injector', () => {
         const UIComponent = () => {
-            const { injector } = React.useContext(DIContext);
+            const {injector} = React.useContext(DIContext);
 
             expect(injector).toBe(undefined);
 
@@ -15,8 +15,8 @@ describe('DIContext', () => {
         };
 
         render(
-            <DIContext.Provider value={{ injector: undefined }}>
-                <UIComponent />
+            <DIContext.Provider value={{injector: undefined}}>
+                <UIComponent/>
             </DIContext.Provider>,
         );
     });
@@ -25,7 +25,7 @@ describe('DIContext', () => {
         const injectorStub = new Injector();
 
         const UIComponent = () => {
-            const { injector } = React.useContext(DIContext);
+            const {injector} = React.useContext(DIContext);
 
             expect(injector).toBe(injectorStub);
 
@@ -33,8 +33,8 @@ describe('DIContext', () => {
         };
 
         render(
-            <DIContext.Provider value={{ injector: injectorStub }}>
-                <UIComponent />
+            <DIContext.Provider value={{injector: injectorStub}}>
+                <UIComponent/>
             </DIContext.Provider>,
         );
     });

@@ -1,18 +1,32 @@
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 import React from 'react';
-import {Injector} from '../injector';
-import {InjectorStub} from '../injector/injector.stub';
-import {InjectionToken} from '../models/injection-token.model';
 import {DIContextProvider} from '../di-context/di-context-provider';
 import {useInjection} from './useInjection';
-import {describe, vi, beforeEach, afterEach, it, expect, MockInstance} from 'vitest';
+import {afterEach, beforeEach, describe, expect, it, MockInstance, vi} from 'vitest';
+import {InjectionToken} from '@universal-di/core/dist/src/models';
+import {Injector} from "@universal-di/core/dist/src/injector";
+
+class TestInjector {
+    private readonly value: any;
+
+    constructor(value: any) {
+        this.value = value;
+    }
+
+    get() {
+        return this.value;
+    }
+}
+
+export const InjectorStub = TestInjector;
+
 
 describe('useInjection', () => {
     const tokenStub = new InjectionToken<string>('TOKEN_STUB');
     const valueStub = 'valueStub';
     const ComponentStub = () => {
-        const injectedValue = useInjection(tokenStub);
+        const injectedValue: string = useInjection(tokenStub);
 
         return <div>{injectedValue}</div>;
     };
@@ -30,7 +44,7 @@ describe('useInjection', () => {
     });
 
     it('renders children with provided injector value', () => {
-        injector = new InjectorStub(valueStub);
+        injector = new InjectorStub(valueStub) as any;
 
         render(
             <DIContextProvider injector={injector}>
@@ -43,7 +57,7 @@ describe('useInjection', () => {
     });
 
     it('throws error for no context', () => {
-        injector = new InjectorStub(valueStub);
+        injector = new InjectorStub(valueStub) as any;
 
         const renders = () => render(<ComponentStub/>);
 
