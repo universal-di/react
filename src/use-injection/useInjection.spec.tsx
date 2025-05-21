@@ -1,10 +1,18 @@
-import '@testing-library/jest-dom';
-import {render, screen} from '@testing-library/react';
-import React from 'react';
-import {DIContextProvider} from '../di-context/di-context-provider';
-import {useInjection} from './useInjection';
-import {afterEach, beforeEach, describe, expect, it, MockInstance, vi} from 'vitest';
-import {InjectionToken, Injector} from "@universal-di/core";
+import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
+import React from "react";
+import { DIContextProvider } from "../di-context/di-context-provider";
+import { useInjection } from "./useInjection";
+import {
+    afterEach,
+    beforeEach,
+    describe,
+    expect,
+    it,
+    MockInstance,
+    vi,
+} from "vitest";
+import { InjectionToken, Injector } from "@universal-di/core";
 
 class TestInjector {
     private readonly value: any;
@@ -20,10 +28,9 @@ class TestInjector {
 
 export const InjectorStub = TestInjector;
 
-
-describe('useInjection', () => {
-    const tokenStub = new InjectionToken<string>('TOKEN_STUB');
-    const valueStub = 'valueStub';
+describe("useInjection", () => {
+    const tokenStub = new InjectionToken<string>("TOKEN_STUB");
+    const valueStub = "valueStub";
     const ComponentStub = () => {
         const injectedValue: string = useInjection(tokenStub);
 
@@ -34,32 +41,33 @@ describe('useInjection', () => {
     let consoleErrorSpy: MockInstance;
 
     beforeEach(() => {
-        consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {
-        });
+        consoleErrorSpy = vi
+            .spyOn(console, "error")
+            .mockImplementation(() => {});
     });
 
     afterEach(() => {
         consoleErrorSpy.mockRestore();
     });
 
-    it('renders children with provided injector value', () => {
+    it("renders children with provided injector value", () => {
         injector = new InjectorStub(valueStub) as any;
 
         render(
             <DIContextProvider injector={injector}>
-                <ComponentStub/>
-            </DIContextProvider>,
+                <ComponentStub />
+            </DIContextProvider>
         );
 
         // @ts-ignore
         expect(screen.getByText(valueStub)).toBeInTheDocument();
     });
 
-    it('throws error for no context', () => {
+    it("throws error for no context", () => {
         injector = new InjectorStub(valueStub) as any;
 
-        const renders = () => render(<ComponentStub/>);
+        const renders = () => render(<ComponentStub />);
 
-        expect(renders).toThrowError('No di context provided');
+        expect(renders).toThrowError("No DI context provided");
     });
 });
