@@ -27,7 +27,7 @@
         "vitest": "^1.1.0"
     },
     "dependencies": {
-        "@universal-di/core": "^0.0.7",
+        "@universal-di/core": "^1.0.3",
         "react": "^18.2.0"
     },
     "bugs": {
