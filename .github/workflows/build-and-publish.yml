@@ -5,30 +5,38 @@ name: build and publish
 
 on:
     release:
-        types: [ created ]
+        types: [created]
 
 jobs:
     test:
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v3
-            -   uses: actions/setup-node@v3
-                with:
-                    node-version: 20
-            -   run: yarn install
-            -   run: yarn test:ci
+            - uses: actions/checkout@v3
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 8
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 22
+                  cache: "pnpm"
+            - run: pnpm install
+            - run: pnpm test:ci
 
     publish-npm:
         needs: test
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v3
-            -   uses: actions/setup-node@v3
-                with:
-                    node-version: 20
-                    registry-url: https://registry.npmjs.org/
-            -   run: yarn install
-            -   run: yarn build
-            -   run: yarn publish
-                env:
-                    NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+            - uses: actions/checkout@v3
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 8
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 22
+                  registry-url: https://registry.npmjs.org/
+                  cache: "pnpm"
+            - run: pnpm install --strict-peer-dependencies=false
+            - run: pnpm build
+            - run: pnpm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.npm_token}}
