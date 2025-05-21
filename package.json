@@ -1,6 +1,6 @@
 {
     "name": "@universal-di/react",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Universal Dependency Injection port for React",
     "scripts": {
         "build": "rimraf ./dist && tsc -p tsconfig.lib.json",
