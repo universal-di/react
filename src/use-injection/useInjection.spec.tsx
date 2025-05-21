@@ -13,6 +13,7 @@ import {
 } from "vitest";
 import { DIContextProvider } from "../di-context/di-context-provider";
 import { useInjection } from "./useInjection";
+import React from "react";
 
 describe("useInjection", () => {
     const tokenStub = new InjectionToken("TOKEN_STUB");
@@ -53,6 +54,6 @@ describe("useInjection", () => {
 
         const renders = () => render(<ComponentStub />);
 
-        expect(renders).toThrowError("No di context provided");
+        expect(renders).toThrowError("No DI context provided");
     });
 });
